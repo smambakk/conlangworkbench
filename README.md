@@ -63,15 +63,15 @@ These files can be edited by hand. The workbench saves automatically when you ty
 Defines the sound system of your language.
 
 **Key features:**\
-- **Phoneme inventory** — consonants and vowels, each with optional articulatory features (e.g. `{"bilabial", "stop", "voiceless"}`).\
-- **Syllable templates** — CV patterns like `CV`, `CVC`, `CCVC`, `(C)V(C)`. Parentheses mark optional positions.\
-- **Phonotactic rules** — constraints on sound sequences. Built-in rule types:\
-  - `no_cluster` — max N consecutive consonants or vowels\
-  - `forbidden_sequence` — a specific sequence that may never occur\
-  - `word_final_forbidden` — sounds banned in word-final position\
-  - `word_initial_forbidden` — sounds banned word-initially\
-- **Input aliases** — map plain ASCII typing to IPA symbols automatically. For example, if your inventory contains `ɑ` (IPA alpha), typing `a` is automatically accepted and stored as `ɑ`. You can also define custom aliases like `sh → ɕ` or `r → ɾ`.\
-- **Digraphs** — multi-character phoneme symbols (e.g. `dh` for `ð`) are fully supported. Longest-match tokenisation means `dh` always takes priority over `d` when the next character is `h`.\
+- **Phoneme inventory** — consonants and vowels, each with optional articulatory features (e.g. `{"bilabial", "stop", "voiceless"}`).
+- **Syllable templates** — CV patterns like `CV`, `CVC`, `CCVC`, `(C)V(C)`. Parentheses mark optional positions.
+- **Phonotactic rules** — constraints on sound sequences. Built-in rule types:
+  - `no_cluster` — max N consecutive consonants or vowels
+  - `forbidden_sequence` — a specific sequence that may never occur
+  - `word_final_forbidden` — sounds banned in word-final position
+  - `word_initial_forbidden` — sounds banned word-initially
+- **Input aliases** — map plain ASCII typing to IPA symbols automatically. For example, if your inventory contains `ɑ` (IPA alpha), typing `a` is automatically accepted and stored as `ɑ`. You can also define custom aliases like `sh → ɕ` or `r → ɾ`.
+- **Digraphs** — multi-character phoneme symbols (e.g. `dh` for `ð`) are fully supported. Longest-match tokenisation means `dh` always takes priority over `d` when the next character is `h`.
 
 **In the phonology shell:**
 ```
@@ -106,7 +106,7 @@ The dictionary stores roots, affixes, and derived forms with full metadata.
 | `irregularity_reason` | Explanation for phonologically irregular forms (see below) |
 | `related` | List of etymologically or semantically linked forms |
 
-**Irregularity annotation** — a key feature. When a word breaks a phonotactic rule but the user keeps it anyway, the engine will ask: *"Why is this form irregular?"* The reason is stored alongside the warnings and displayed in lexicon listings, inflection traces, and the `irregular` command. This lets you document the historical or etymological logic behind any irregularities
+**Irregularity annotation** — a key feature. When a word breaks a phonotactic rule but the user keeps it anyway, the engine will ask: *"Why is this form irregular?"* The reason is stored alongside the warnings and displayed in lexicon listings, inflection traces, and the `irregular` command. This lets you document the historical or etymological logic behind any irregularities.
 
 ```
 ⚠  = flagged, no reason given yet
@@ -130,7 +130,7 @@ load <path>                    Merge from JSON
 quit
 ```
 
-**Pattern analysis** — `report` and `suggest` scan your existing vocabulary and surface regularities: onset distributions, vowel nuclei, common bigrams, recurring sequences. `suggest` makes concrete recommendations: *"80% of your nouns end in a vowel — consider formalising that as a noun class marker."*
+**Pattern analysis** — `report` and `suggest` scan your existing vocabulary and surface regularities: onset distributions, vowel nuclei, common bigrams, recurring sequences. `suggest` makes concrete recommendations: *"80% of your nouns end in a vowel — consider formalizing that as a noun class marker."*
 
 ---
 
@@ -138,18 +138,18 @@ quit
 
 Handles word-internal structure and how roots combine with affixes to produce inflected or derived forms.
 
-**Key features:**\
-- **Feature map** — maps grammatical category+value pairs to affix forms. e.g. `tense=past → -an`, `number=plural → -i`. Auto-populated from lexicon entries tagged with `pos=suffix/prefix` and a `tags` list.\
-- **Affix slots** — define the ordered positions of affixes for each POS. e.g. for verbs: `aspect (prefix, pos=0) → root → tense (suffix, pos=0) → number (suffix, pos=1)`. Slot ordering determines the final shape of complex word forms.\
-- **Morphophonological rules** — sound changes at morpheme boundaries. Built-in operations:\
-  - `delete_stem_final` — drop the last character of the stem\
-  - `delete_affix_initial` — drop the first character of the affix\
-  - `insert` — insert a string at the boundary\
-  - `replace_stem_final` / `replace_affix_initial` — substitution\
-  - `geminate_boundary` — double the consonant at the junction\
-- **Paradigm builder** — `build_paradigm()` generates a full inflection table for a root across a list of feature bundles.\
-- **Derivation** — `derive()` creates new lexemes from existing roots using derivational affixes, and optionally adds them to the lexicon with `source="derived"`.\
-- **Morphological analysis** — `analyse()` runs in reverse: strips known affixes from a surface form and returns candidate root+feature parses.\
+**Key features:**
+- **Feature map** — maps grammatical category+value pairs to affix forms. e.g. `tense=past → -an`, `number=plural → -i`. Auto-populated from lexicon entries tagged with `pos=suffix/prefix` and a `tags` list.
+- **Affix slots** — define the ordered positions of affixes for each POS. e.g. for verbs: `aspect (prefix, pos=0) → root → tense (suffix, pos=0) → number (suffix, pos=1)`. Slot ordering determines the final shape of complex word forms.
+- **Morphophonological rules** — sound changes at morpheme boundaries. Built-in operations:
+  - `delete_stem_final` — drop the last character of the stem
+  - `delete_affix_initial` — drop the first character of the affix
+  - `insert` — insert a string at the boundary
+  - `replace_stem_final` / `replace_affix_initial` — substitution
+  - `geminate_boundary` — double the consonant at the junction
+- **Paradigm builder** — `build_paradigm()` generates a full inflection table for a root across a list of feature bundles.
+- **Derivation** — `derive()` creates new lexemes from existing roots using derivational affixes, and optionally adds them to the lexicon with `source="derived"`.
+- **Morphological analysis** — `analyse()` runs in reverse: strips known affixes from a surface form and returns candidate root+feature parses.
 
 **Irregularity tracing** — if a root has a documented irregularity reason in the lexicon, it appears inline in the inflection trace.
 
@@ -174,25 +174,25 @@ quit
 
 Assembles inflected tokens into sentences and translates bidirectionally.
 
-**Grammar features:**\
-- **Word order** — any of the six standard typologies: `SVO SOV VSO VOS OVS OSV`. Set as a base typology; custom `WordOrderRule` objects can override it for specific clause types (e.g. interrogatives are verb-initial even in an otherwise SOV language).\
-- **Agreement rules** — `AgreementRule(controller, target, feature)` copies a feature from one clause argument to another. e.g. verb agrees with subject in number.\
-- **Case assignment** — maps clause roles to case values: `subject→nominative`, `direct_object→accusative`, etc. Feeds directly into the morphology pipeline.\
-- **Negation** — configurable particle (`before_verb`, `after_verb`, `clause_final`) or verb affix.\
-- **Particles** — arbitrary grammatical particles keyed by function: `question`, `topic`, `focus`, etc.\
+**Grammar features:**
+- **Word order** — any of the six standard typologies: `SVO SOV VSO VOS OVS OSV`. Set as a base typology; custom `WordOrderRule` objects can override it for specific clause types (e.g. interrogatives are verb-initial even in an otherwise SOV language).
+- **Agreement rules** — `AgreementRule(controller, target, feature)` copies a feature from one clause argument to another. e.g. verb agrees with subject in number.
+- **Case assignment** — maps clause roles to case values: `subject→nominative`, `direct_object→accusative`, etc. Feeds directly into the morphology pipeline.
+- **Negation** — configurable particle (`before_verb`, `after_verb`, `clause_final`) or verb affix.
+- **Particles** — arbitrary grammatical particles keyed by function: `question`, `topic`, `focus`, etc.
 
-**Translation pipeline (English → conlang):**\
-1. Parse English sentence into subject / verb / object / modifiers, detecting tense and negation.\
-2. Look up each lemma in the lexicon by English gloss.\
-3. Inflect each token using the morphology engine with its grammatical features.\
-4. Apply word-order template and agreement rules.\
-5. Insert negation and particles.\
+**Translation pipeline (English → conlang):**
+1. Parse English sentence into subject / verb / object / modifiers, detecting tense and negation.
+2. Look up each lemma in the lexicon by English gloss.
+3. Inflect each token using the morphology engine with its grammatical features.
+4. Apply word-order template and agreement rules.
+5. Insert negation and particles.
 
-**Translation pipeline (conlang → English):**\
-1. Tokenize the conlang sentence.\
-2. Strip known affixes via morphological analysis → root + features.\
-3. Look up root in lexicon → English gloss.\
-4. Reconstruct English with basic tense marking.\
+**Translation pipeline (conlang → English):**
+1. Tokenize the conlang sentence.
+2. Strip known affixes via morphological analysis → root + features.
+3. Look up root in lexicon → English gloss.
+4. Reconstruct English with basic tense marking.
 
 The `trace` command / `TranslationResult.log()` prints every step of either pipeline.
 
